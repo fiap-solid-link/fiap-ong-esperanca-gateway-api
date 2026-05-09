@@ -13,6 +13,11 @@ public static class HealthCheckExtensions
                 new Uri(configuration["HealthChecks:IdentityApi:Uri"]
                     ?? "http://fiap-ong-esperanca-identity-api/health"),
                 name: "identity-api",
+                timeout: TimeSpan.FromSeconds(10))
+            .AddUrlGroup(
+                new Uri(configuration["HealthChecks:CampanhasApi:Uri"]
+                    ?? "http://fiap-ong-esperanca-campanhas-api/health"),
+                name: "campanhas-api",
                 timeout: TimeSpan.FromSeconds(10));
 
         return services;
@@ -43,4 +48,5 @@ public static class HealthCheckExtensions
             }
         });
     }
+    
 }
