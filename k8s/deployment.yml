@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-api
+  namespace: esperanca
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: gateway-api }
+  template:
+    metadata:
+      labels: { app: gateway-api }
+    spec:
+      containers:
+        - name: gateway-api
+          image: fzndev/fiap-ong-esperanca-gateway-api:latest
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef: { name: gateway-api-config }
+          readinessProbe:
+            httpGet: { path: /health, port: 8080 }
+            initialDelaySeconds: 10
+          livenessProbe:
+            httpGet: { path: /health, port: 8080 }
+            initialDelaySeconds: 20
