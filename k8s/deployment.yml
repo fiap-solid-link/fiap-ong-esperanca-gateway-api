@@ -14,6 +14,7 @@ spec:
       containers:
         - name: gateway-api
           image: fzndev/fiap-ong-esperanca-gateway-api:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           envFrom:
