@@ -27,6 +27,3 @@ jobs:
 
       - name: Build solution
         run: dotnet build Esperanca.Gateway.slnx --configuration Release --no-restore
-
-      - name: Build Docker image
-        run: docker build -t esperanca-gateway-api:ci .
